@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namorico</title>
+
+    <style>
+        body {
+            background-color: rgb(255, 225, 230);
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .painel {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden; /* Para esconder o botão caso ele se mova para fora do painel */
+        }
+
+        #sim, #nao {
+            height: 40px;
+            width: 80px;
+            background-color: red;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin: 10px;
+        }
+
+        #sim:hover {
+            transform: scale(1.1);
+            background-color: darkred;
+        }
+
+        #nao {
+            margin-left: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .gif-container img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="painel">
+        <h1>Oiee amor, sou eu o Milho 🌽</h1>
+        <div class="gif-container">
+            <img src="https://media3.giphy.com/media/Y00mF6fy4LJdDFeN5M/giphy.gif?cid=6c09b9520i8s2qp9q6g74ryjde025ms1nvwxqqw7zzo1guea&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Gif de amor">
+        </div>
+        
+        <h2>Dona Bianca, aceita namorar comigo ?</h2>
+        
+        <div class="buttons-container">
+            <a href="https://www.youtube.com/watch?v=0mJMW2CzTiA" target="_blank"><button id="sim">Sim!</button></a>
+            <button id="nao">Não!</button>
+        </div>
+    </div>
+
+    <script>
+        function fuja() {
+            var botaoNao = document.getElementById("nao");
+
+            var painel = document.querySelector('.painel');
+            var larguraPainel = painel.offsetWidth;
+            var alturaPainel = painel.offsetHeight;
+
+            var botaoNaoWidth = botaoNao.offsetWidth;
+            var botaoNaoHeight = botaoNao.offsetHeight;
+
+            var maxX = larguraPainel - botaoNaoWidth;
+            var maxY = alturaPainel - botaoNaoHeight;
+
+            var aleatorioX = Math.random() * maxX;
+            var aleatorioY = Math.random() * maxY;
+
+            // Limitando a posição dentro do painel
+            aleatorioX = Math.max(0, aleatorioX); // Garante que não seja menor que 0
+            aleatorioY = Math.max(0, aleatorioY); // Garante que não seja menor que 0
+            aleatorioX = Math.min(maxX, aleatorioX); // Garante que não seja maior que maxX
+            aleatorioY = Math.min(maxY, aleatorioY); // Garante que não seja maior que maxY
+
+            botaoNao.style.left = aleatorioX + "px";
+            botaoNao.style.top = aleatorioY + "px";
+        }
+
+        document.getElementById("nao").addEventListener("mouseover", fuja);
+        document.getElementById("nao").addEventListener("touchstart", fuja);
+    </script>
+</body>
+</html>
